@@ -49,7 +49,7 @@ const HomePage = () => {
     }
   };
 
-  //getTOtal COunt
+  //getTotal Count
   const getTotal = async () => {
     try {
       const { data } = await axios.get("/api/v1/product/product-count");
@@ -63,7 +63,7 @@ const HomePage = () => {
     if (page === 1) return;
     loadMore();
   }, [page]);
-  //load more
+  //Load more
   const loadMore = async () => {
     try {
       setLoading(true);
@@ -94,7 +94,7 @@ const HomePage = () => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
-  //get filterd product
+  //get filtered product
   const filterProduct = async () => {
     try {
       const { data } = await axios.post("/api/v1/product/product-filters", {
@@ -107,7 +107,7 @@ const HomePage = () => {
     }
   };
   return (
-    <Layout title={"ALl Products - Best offers "}>
+    <Layout title={"ALL Products - Best offers "}>
       {/* banner image */}
       <img
         src="/images/banner.png"
@@ -159,7 +159,7 @@ const HomePage = () => {
                   className="card-img-top"
                   alt={p.name}
                 />
-                <div className="card-body">
+                <div className="card-body" >
                   <div className="card-name-price">
                     <h5 className="card-title">{p.name}</h5>
                     <h5 className="card-title card-price">

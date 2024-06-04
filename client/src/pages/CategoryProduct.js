@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import { useParams, useNavigate } from "react-router-dom";
+// import { Audio } from 'react-loader-spinner'
 import "../styles/CategoryProductStyles.css";
 import axios from "axios";
+import Spinner from "../components/Spinner";
 const CategoryProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
-
+  const [loading , setloading ] = useState(true)
   useEffect(() => {
     if (params?.slug) getPrductsByCat();
   }, [params?.slug]);
@@ -19,6 +21,7 @@ const CategoryProduct = () => {
       );
       setProducts(data?.products);
       setCategory(data?.category);
+      setloading(false);
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +29,9 @@ const CategoryProduct = () => {
 
   return (
     <Layout>
-      <div className="container mt-3 category">
+      {
+       
+        <div className="container mt-3 category">
         <h4 className="text-center">Category - {category?.name}</h4>
         <h6 className="text-center">{products?.length} result found </h6>
         <div className="row">
@@ -93,6 +98,8 @@ const CategoryProduct = () => {
           </div>
         </div>
       </div>
+      }
+
     </Layout>
   );
 };

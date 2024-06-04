@@ -4,6 +4,7 @@ import Layout from "./../../components/Layout/Layout";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
   //context
   const [auth, setAuth] = useAuth();
@@ -13,6 +14,7 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
   //get user data
   useEffect(() => {
@@ -34,7 +36,7 @@ const Profile = () => {
         phone,
         address,
       });
-      if (data?.errro) {
+      if (data?.error) {
         toast.error(data?.error);
       } else {
         setAuth({ ...auth, user: data?.updatedUser });
@@ -43,6 +45,7 @@ const Profile = () => {
         ls.user = data.updatedUser;
         localStorage.setItem("auth", JSON.stringify(ls));
         toast.success("Profile Updated Successfully");
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -115,6 +118,7 @@ const Profile = () => {
 
                 <button type="submit" className="btn btn-primary">
                   UPDATE
+                  
                 </button>
               </form>
             </div>
